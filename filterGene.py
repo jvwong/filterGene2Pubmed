@@ -69,7 +69,7 @@ for ppts in PARTICIPANTS_CLASSIC:
 
   abstracts = []
   pmids = [ str(i) for i in raw_pmids ]
-  pmids = pmids[20:30]
+  pmids = pmids[50:60]
   for pmid in pmids:
     abstract = pubmed_text( pmid )
     print( f'\'\'\'{abstract}\'\'\',' )
