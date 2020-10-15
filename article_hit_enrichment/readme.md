@@ -24,9 +24,9 @@ As described below, the current hit rate is ~10% for a selected subset of journa
 |  **Total** |  |  | 2065 | 240 | 10.4% |
 
 
-# Data
+# Training
 
-## PubMed
+## PubMed data
 
 - `all_pmids.txt`: A newline-delimited list of PubMed uids including all the articles considered (N=2065)
 - `hits_pmids.txt`: A newline-delimited list of PubMed uids for those articles deemed appropriate for inclusion in Biofactoid (N=240)
