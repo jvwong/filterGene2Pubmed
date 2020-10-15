@@ -13,7 +13,7 @@ As described below, the current hit rate is ~10% for a selected subset of journa
 
 # Journal analysis
 
-|  **ISSN** | **Journal** | **Coverage [vol(iss)]** | **all** | **hits*** | **rate** |
+|  **ISSN** | **Journal** | **Coverage [vol(iss)]** | **all** | **hit** | **rate** |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |  2211-1247 | Cell Reports | 30(1) - 32(11) | 953 | 109 | 10.3% |
 |  1097-4164 | Molecular Cell | 73(1) - 79(6) | 725 | 85 | 10.5% |
@@ -21,7 +21,7 @@ As described below, the current hit rate is ~10% for a selected subset of journa
 |  1476-4679 | Nature Cell Biology | 22(4) - 22(9) | 84 | 10 | 10.6% |
 |  1083-351X | Journal of Biological Chemistry | 295(31) - 295(37) | 210 | 21 | 9.1% |
 |   |  |  |  |  |  |
-|  **Total** |  |  | 2065 | 240 | 10.4% |
+|  **Total** |  |  | 2065 | 240 | 11.6% |
 
 
 # Training
