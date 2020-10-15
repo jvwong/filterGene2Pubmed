@@ -2,7 +2,7 @@
 
 This folder contains a set of data files intended to facilitate automated detection of articles that are suitable for Biofactoid. The goal is to identify article authors who could be invited to contribute their article to Biofactoid via the homepage.
 
-## Journal evaluation overview
+# Journal overview
 
 |  **issn** | **journal** | **coverage [vol(iss)]** | **all** | **hit** | **rate** |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -16,7 +16,9 @@ This folder contains a set of data files intended to facilitate automated detect
 
 * 'hit' defined as an article containing at least one experimentally-verified interaction that is supported by the Biofactoid model
 
-## Data files provided
+# Data
+
+## PubMed
 
 - `all_pmids.txt`: A newline-delimited list of PubMed uids including all the articles considered (N=2065)
 - `hits_pmids.txt`: A newline-delimited list of PubMed uids for those articles deemed appropriate for inclusion in Biofactoid (N=240)
@@ -25,9 +27,12 @@ This folder contains a set of data files intended to facilitate automated detect
 - `test_hits_pmids.txt`:  A newline-delimited list of PubMed uids in `test_pubmed_info.json` that are hits (N=117)
 - `train_hits_pmids.txt`:  A newline-delimited list of PubMed uids in `train_pubmed_info.json` that are hits (N=123)
 
+
 ## Scripts
 
 - `enrichment.py`: The script used to generate the test and train files
+  - createTestTrainPubMedData: Generate `test_pubmed_info.json` and `train_pubmed_info.json` files
+  - getTestTrainHits: Generate `test_hits_pmids.txt` and `train_hits_pmids.txt` files
 
 ---
 

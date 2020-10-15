@@ -55,19 +55,14 @@ def writeJson2File( filename, data ):
     json.dump(data, f, indent=2, sort_keys=True)
 
 
-# def main():
-#   ids = readDataCol( ALL_INPUT_FILE_NAME )
-#   sets = split( ids, k=2 )
-#   test_efetch_response = efetch( sets['test'] )
-#   writeJson2File( TEST_OUTPUT_FILE_NAME, test_efetch_response )
-#   train_efetch_response = efetch( sets['train'] )
-#   writeJson2File( TRAIN_OUTPUT_FILE_NAME, train_efetch_response )
+def createTestTrainPubMedData():
+  ids = readDataCol( ALL_INPUT_FILE_NAME )
+  sets = split( ids, k=2 )
+  test_efetch_response = efetch( sets['test'] )
+  writeJson2File( TEST_OUTPUT_FILE_NAME, test_efetch_response )
+  train_efetch_response = efetch( sets['train'] )
+  writeJson2File( TRAIN_OUTPUT_FILE_NAME, train_efetch_response )
 
-# main()
-
-######################################################################################################
-########################     EVALUATE         ########################################################
-######################################################################################################
 
 def readJsonFromFile( filename ):
   data = None
@@ -86,13 +81,19 @@ def write2ColFile( filename, data ):
     for item in data:
       f.write("%s\n" % item)
 
-def main():
+def getTestTrainHits():
   train = readJsonFromFile( TRAIN_OUTPUT_FILE_NAME )
   train_hits = getHits( train )
   write2ColFile( TRAIN_HITS_FILE_NAME, list( train_hits ) )
   test = readJsonFromFile( TEST_OUTPUT_FILE_NAME )
   test_hits = getHits( test )
   write2ColFile( TEST_HITS_FILE_NAME, list( test_hits ) )
+
+
+def main():
+  pass
+  # createTestTrainPubMedData()
+  # getTestTrainHits()
 
 
 main()
