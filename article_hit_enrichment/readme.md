@@ -56,4 +56,4 @@ As described below, the current hit rate is ~10% for a selected subset of journa
 
 ---
 
-Last updated: October 14, 2020
+Last updated: October 15, 2020
