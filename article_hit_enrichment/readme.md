@@ -48,7 +48,11 @@ As described below, the current hit rate is ~10% for a selected subset of journa
 - Simple: Provide a set of articles for which the hit rate exceeds 10%, to make pre-screening more efficient.
 - Alternative: Model proportion as a hypergeometric distribution... etc
 
-// TODO
+## Scripts
+
+- `evaluate.py`: Calculate the proportion of actual hits identified in `test_pubmed_info.json`. Simply provide a file path containing a newline-delimited list of candidate PubMed uids.
+  - Useage: `python eval.py <path to file>`
+  - Example: `python eval.py evalute.txt`
 
 ---
 
