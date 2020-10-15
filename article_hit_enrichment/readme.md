@@ -43,11 +43,12 @@ As described below, the current hit rate is ~10% for a selected subset of journa
   - getTestTrainHits: Generate `test_hits_pmids.txt` and `train_hits_pmids.txt` files
 
 
-# Evaulation
+# Evaluation
 
-Model as a hypergeometric distribution. Try to beat 10% to save the screener time.
+- Simple: Try to beat 10% to save the screener time.
+- Model as a hypergeometric distribution... etc
 
-//todo
+// TODO
 
 ---
 
