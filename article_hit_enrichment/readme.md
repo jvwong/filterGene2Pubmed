@@ -45,8 +45,8 @@ As described below, the current hit rate is ~10% for a selected subset of journa
 
 # Evaluation
 
-- Simple: Try to beat 10% to save the screener time.
-- Model as a hypergeometric distribution... etc
+- Simple: Provide a set of articles for which the hit rate exceeds 10%, to make pre-screening more efficient.
+- Alternative: Model proportion as a hypergeometric distribution... etc
 
 // TODO
 
