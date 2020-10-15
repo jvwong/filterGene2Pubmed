@@ -1,10 +1,19 @@
 # Biofactoid: Article Hit Enrichment
 
-This folder contains a set of data files intended to facilitate automated detection of articles that are suitable for Biofactoid. The goal is to identify article authors who could be invited to contribute their article to Biofactoid via the homepage.
+## Background
 
-# Journal overview
+A valuable goal is to identify article authors who could be invited to contribute their article to Biofactoid via the homepage. Currently, articles are manually pre-screened by looking at a given journal, issue by issue, article by article. Typically, the article title, abstract and figures are skimmed to determine suitability. This can take as little as a few seconds to reject whereas it may require tens of minutes to flag an article as a hit - containing at least one, low-throughput, experimentally-verified interaction that is compatible with the Biofactoid model.
 
-|  **issn** | **journal** | **coverage [vol(iss)]** | **all** | **hit** | **rate** |
+## Goal
+
+Ideally, it would be desirable to have a way to directly identify articles suitable for Biofactoid - 'hits'. However, a more realistic goal would be to provide a set of articles for pre-screening enriched for hits.
+
+As described below, the current hit rate is ~10% for a selected subset of journals. This folder contains files intended to support development of means for enriching article hits.
+
+
+# Journal analysis
+
+|  **ISSN** | **Journal** | **Coverage [vol(iss)]** | **all** | **hits*** | **rate** |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |  2211-1247 | Cell Reports | 30(1) - 32(11) | 953 | 109 | 10.3% |
 |  1097-4164 | Molecular Cell | 73(1) - 79(6) | 725 | 85 | 10.5% |
@@ -14,7 +23,6 @@ This folder contains a set of data files intended to facilitate automated detect
 |   |  |  |  |  |  |
 |  **Total** |  |  | 2065 | 240 | 10.4% |
 
-* 'hit' defined as an article containing at least one experimentally-verified interaction that is supported by the Biofactoid model
 
 # Data
 
@@ -33,6 +41,13 @@ This folder contains a set of data files intended to facilitate automated detect
 - `main.py`: The script used to generate the test and train files
   - createTestTrainPubMedData: Generate `test_pubmed_info.json` and `train_pubmed_info.json` files
   - getTestTrainHits: Generate `test_hits_pmids.txt` and `train_hits_pmids.txt` files
+
+
+# Evaulation
+
+Model as a hypergeometric distribution. Try to beat 10% to save the screener time.
+
+//todo
 
 ---
 
