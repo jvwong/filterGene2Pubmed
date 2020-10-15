@@ -10,10 +10,11 @@ Ideally, it would be desirable to have a way to directly identify articles suita
 
 As described below, the current hit rate is ~10% for a selected subset of journals. This folder contains files intended to support development of means for enriching article hits.
 
+</br>
 
 # Journal analysis
 
-|  **ISSN** | **Journal** | **Coverage [vol(iss)]** | **all** | **hit** | **rate** |
+|  **ISSN** | **Journal** | **Coverage [vol(iss)]** | **all** | **hit** | **Rate** |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |  2211-1247 | Cell Reports | 30(1) - 32(11) | 953 | 109 | 10.3% |
 |  1097-4164 | Molecular Cell | 73(1) - 79(6) | 725 | 85 | 10.5% |
@@ -21,8 +22,11 @@ As described below, the current hit rate is ~10% for a selected subset of journa
 |  1476-4679 | Nature Cell Biology | 22(4) - 22(9) | 84 | 10 | 10.6% |
 |  1083-351X | Journal of Biological Chemistry | 295(31) - 295(37) | 210 | 21 | 9.1% |
 |   |  |  |  |  |  |
-|  **Total** |  |  | 2065 | 240 | 11.6% |
+|  **Total** |  |  | 2065 | 240 | - |
+|  **Average** |  |  |  |  | 11.6% |
+|  **Weighted** |  |  |  |  | 10.4% |
 
+</br>
 
 # Training
 
@@ -42,6 +46,7 @@ As described below, the current hit rate is ~10% for a selected subset of journa
   - createTestTrainPubMedData: Generate `test_pubmed_info.json` and `train_pubmed_info.json` files
   - getTestTrainHits: Generate `test_hits_pmids.txt` and `train_hits_pmids.txt` files
 
+</br>
 
 # Evaluation
 
