@@ -30,7 +30,7 @@ This folder contains a set of data files intended to facilitate automated detect
 
 ## Scripts
 
-- `enrichment.py`: The script used to generate the test and train files
+- `main.py`: The script used to generate the test and train files
   - createTestTrainPubMedData: Generate `test_pubmed_info.json` and `train_pubmed_info.json` files
   - getTestTrainHits: Generate `test_hits_pmids.txt` and `train_hits_pmids.txt` files
 
