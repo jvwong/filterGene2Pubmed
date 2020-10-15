@@ -6,7 +6,7 @@ A valuable goal is to identify article authors who could be invited to contribut
 
 ## Goal
 
-Ideally, it would be desirable to have a way to directly identify articles suitable for Biofactoid - 'hits'. However, a more realistic goal would be to provide a set of articles for pre-screening enriched for hits.
+Ideally, it would be desirable to have a way to directly identify articles suitable for Biofactoid - 'hits'. However, a more realistic goal would be to provide a set of articles for pre-screening enriched for hits. In more formal terms, the goal is to increase the precision of article detection relative to manual prescreening.
 
 As described below, the current hit rate is ~10% for a selected subset of journals. This folder contains files intended to support development of means for enriching article hits.
 
