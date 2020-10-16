@@ -67,11 +67,11 @@ from (N=1033)
 
 # Evaluate
 
-- The null model is a hypergeometric distribution composed of:
+- The null model is a hypergeometric distribution `F(x; N, n, M)` where:
   - M: The total number of articles in the test set
   - n: The total number of hits in the test set
   - N: The number of articles proposed (i.e. by the candidate algorithm)
-  - x: The actual number of hits maong the set of proposed articles
+  - x: The actual number of hits among the set of proposed articles
 
 ## Scripts
 
@@ -91,4 +91,4 @@ from (N=1033)
 
 ---
 
-Last updated: October 15, 2020
+Last updated: October 16, 2020
