@@ -26,17 +26,20 @@ As described below, the current hit rate is ~10% for a selected subset of journa
 |  **Average** |  |  |  |  | 11.6% |
 |  **Weighted** |  |  |  |  | 10.4% |
 
+
+## Data
+
+- `all_pmids.txt`: A newline-delimited list of PubMed uids including all the articles considered (N=2065).
+  - Gathered using NCBI EUTILS ESEARCH, filtering for journal ([ta]), volume ([vi]), issue ([ip]) and publication type = Journal Artice([pt])
+- `hits_pmids.txt`: A newline-delimited list of PubMed uids for those articles deemed appropriate for inclusion in Biofactoid (N=240)
+
 </br>
 
-# Training
+# Train
 
-## PubMed data
+## Data
 
-- `all_pmids.txt`: A newline-delimited list of PubMed uids including all the articles considered (N=2065)
-- `hits_pmids.txt`: A newline-delimited list of PubMed uids for those articles deemed appropriate for inclusion in Biofactoid (N=240)
-- `test_pubmed_info.json`: The EUTILS EFETCH response for each PubMed uid in a sample of `all_pmids.txt` (N=1032)
 - `train_pubmed_info.json`: The EUTILS EFETCH response for each PubMed uid that are not part of `test_pubmed_info.json` from (N=1033)
-- `test_hits_pmids.txt`:  A newline-delimited list of PubMed uids in `test_pubmed_info.json` that are hits (N=117)
 - `train_hits_pmids.txt`:  A newline-delimited list of PubMed uids in `train_pubmed_info.json` that are hits (N=123)
 
 
@@ -48,10 +51,16 @@ As described below, the current hit rate is ~10% for a selected subset of journa
 
 </br>
 
-# Evaluation
+# Test
 
 - Simple: Provide a set of articles for which the hit rate exceeds 10%, to make pre-screening more efficient.
 - Alternative: Model proportion as a hypergeometric distribution... etc
+
+## Data
+
+- `test_pubmed_info.json`: The EUTILS EFETCH response for each PubMed uid in a sample of `all_pmids.txt` (N=1032)
+from (N=1033)
+- `test_hits_pmids.txt`:  A newline-delimited list of PubMed uids in `test_pubmed_info.json` that are hits (N=117)
 
 ## Scripts
 

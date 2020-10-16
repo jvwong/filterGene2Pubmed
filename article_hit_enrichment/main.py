@@ -1,25 +1,49 @@
-import pandas as pd
+
 from Bio import Entrez
 import csv
 import random
 import math
-import pprint
 import json
-pp = pprint.PrettyPrinter()
-pd.set_option('display.max_rows', None)
-pd.set_option('display.max_columns', None)
-pd.set_option('max_colwidth', None)
 
+ALL_INPUT_FILE_NAME = 'all_pmids.txt'
+HITS_INPUT_FILE_NAME = 'hits_pmids.txt'
 
-ALL_INPUT_FILE_NAME = './article_hit_enrichment/all_pmids.txt'
-HITS_INPUT_FILE_NAME = './article_hit_enrichment/hits_pmids.txt'
-
-TEST_OUTPUT_FILE_NAME = './article_hit_enrichment/test_pubmed_info.json'
-TRAIN_OUTPUT_FILE_NAME = './article_hit_enrichment/train_pubmed_info.json'
-TEST_HITS_FILE_NAME = './article_hit_enrichment/test_hits_pmids.txt'
-TRAIN_HITS_FILE_NAME = './article_hit_enrichment/train_hits_pmids.txt'
+TEST_OUTPUT_FILE_NAME = 'test_pubmed_info.json'
+TRAIN_OUTPUT_FILE_NAME = 'train_pubmed_info.json'
+TEST_HITS_FILE_NAME = 'test_hits_pmids.txt'
+TRAIN_HITS_FILE_NAME = 'train_hits_pmids.txt'
 
 Entrez.email = "support@biofactoid.org"
+
+######################################################################################################
+########################     RETRIEVE JOURNAL PMIDS  ##################################################
+######################################################################################################
+
+# journal = '1083-351X'
+# volumes = range(295, 296)
+# issues = range(31, 38, 1)
+
+# def esearch( journal, volume, issue=None ):
+#   term = '{journal}[ta] {volume}[vi] Journal Article[pt]'.format( journal=journal, volume=volume )
+#   if issue:
+#     term += ' {issue}[ip]'.format(issue=issue)
+#   print (term)
+#   handle = Entrez.esearch( db='pubmed', term=term, retmax=10000 )
+#   record = Entrez.read( handle )
+#   handle.close()
+#   return record
+
+# def getPmidsForJournal():
+#   ids = []
+#   for volume in volumes:
+#     for issue in issues:
+#       record = esearch( journal, volume, issue )
+#       ids += record['IdList']
+
+#   with open('{issn}.txt'.format(issn=journal), 'a') as f:
+#     for item in ids:
+#       f.write('{item}\n'.format(item=item))
+
 
 ######################################################################################################
 ########################     CREATE          ########################################################
@@ -90,10 +114,7 @@ def getTestTrainHits():
   write2ColFile( TEST_HITS_FILE_NAME, list( test_hits ) )
 
 
-def main():
+if __name__ == "__main__":
   pass
   # createTestTrainPubMedData()
   # getTestTrainHits()
-
-
-main()
