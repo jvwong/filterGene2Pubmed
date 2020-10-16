@@ -50,13 +50,13 @@ def getTestArticleCount( filename ):
 
 def getPmfDistr( M, n, N, x ):
   rv = hypergeom( M, n, N )
-  xVals = np.arange( 0, x + 1 )
+  xVals = np.arange( 0, n + 1 )
   pmf_hits = rv.pmf( xVals )
   return pmf_hits
 
 def getCdfDistr( M, n, N, x ):
   rv = hypergeom( M, n, N )
-  xVals = np.arange( 0, x + 1 )
+  xVals = np.arange( 0, n + 1 )
   cdf_hits = rv.cdf( xVals )
   return cdf_hits
 
@@ -69,7 +69,7 @@ def calCdfDistr( M, n, N, x ):
 def plotResults(  M, n, N, x ):
   cdf_hits = getCdfDistr( M, n, N, x )
   pmf_hits = getPmfDistr( M, n, N, x )
-  xVals = np.arange(0, x + 1)
+  xVals = np.arange(0, n + 1)
   fig = plt.figure()
   ax = fig.add_subplot(121)
   ax.plot(xVals, pmf_hits)

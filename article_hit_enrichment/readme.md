@@ -10,7 +10,7 @@ Ideally, it would be desirable to have a way to directly identify articles suita
 
 As described below, the current hit rate is ~10% for a selected subset of journals. This folder contains files intended to support development of means for enriching article hits.
 
-</br>
+<br/>
 
 # Journal analysis
 
@@ -26,6 +26,7 @@ As described below, the current hit rate is ~10% for a selected subset of journa
 |  **Average** |  |  |  |  | 11.6% |
 |  **Weighted** |  |  |  |  | 10.4% |
 
+<br/>
 
 ## Data
 
@@ -33,7 +34,7 @@ As described below, the current hit rate is ~10% for a selected subset of journa
   - Gathered using NCBI EUTILS ESEARCH, filtering for journal ([ta]), volume ([vi]), issue ([ip]) and publication type = Journal Artice([pt])
 - `hits_pmids.txt`: A newline-delimited list of PubMed uids for those articles deemed appropriate for inclusion in Biofactoid (N=240)
 
-</br>
+<br/>
 
 # Train
 
@@ -49,7 +50,7 @@ As described below, the current hit rate is ~10% for a selected subset of journa
   - createTestTrainPubMedData: Generate `test_pubmed_info.json` and `train_pubmed_info.json` files
   - getTestTrainHits: Generate `test_hits_pmids.txt` and `train_hits_pmids.txt` files
 
-</br>
+<br/>
 
 # Test
 
@@ -62,11 +63,31 @@ As described below, the current hit rate is ~10% for a selected subset of journa
 from (N=1033)
 - `test_hits_pmids.txt`:  A newline-delimited list of PubMed uids in `test_pubmed_info.json` that are hits (N=117)
 
+<br/>
+
+# Evaluate
+
+- The null model is a hypergeometric distribution composed of:
+  - M: The total number of articles in the test set
+  - n: The total number of hits in the test set
+  - N: The number of articles proposed (i.e. by the candidate algorithm)
+  - x: The actual number of hits maong the set of proposed articles
+
 ## Scripts
 
-- `evaluate.py`: Calculate the proportion of actual hits identified in `test_pubmed_info.json`. Simply provide a file path containing a newline-delimited list of candidate PubMed uids.
-  - Useage: `python eval.py <path to file>`
+- `evaluate.py`: This script calculates the cumulative distribution function (`F(x)`) and outputs the value `1 - F(x)`. It also plots the CDF and probability distribution (`f(x)`).
+  - Useage: Simply provide a file path containing a newline-delimited list of proposed PubMed uids
+    - `python eval.py <path to file>`
   - Example: `python eval.py evalute.txt`
+    - Output:
+      ```
+        M:1032; N:100; n:117; x:23
+        x: 23
+        F(x): 0.9998821316509936
+        1 - F(X): 0.00011786834900640031
+      ```
+      - ![sample distributions](Figure_1.png)
+
 
 ---
 
