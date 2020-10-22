@@ -10,63 +10,63 @@ pd.set_option('max_colwidth', None)
 ########################     ESEARCH          ########################################################
 ######################################################################################################
 
-Entrez.email = "jvwong@outlook.com"
-journal = '1083-351X'
-volumes = range(295, 296)
-issues = range(31, 38, 1)
+# Entrez.email = "jvwong@outlook.com"
+# journal = '1083-351X'
+# volumes = range(295, 296)
+# issues = range(31, 38, 1)
 
-def esearch( journal, volume, issue=None ):
-  term = '{journal}[ta] {volume}[vi] Journal Article[pt]'.format( journal=journal, volume=volume )
-  if issue:
-    term += ' {issue}[ip]'.format(issue=issue)
-  print (term)
-  handle = Entrez.esearch( db='pubmed', term=term, retmax=10000 )
-  record = Entrez.read( handle )
-  handle.close()
-  return record
+# def esearch( journal, volume, issue=None ):
+#   term = '{journal}[ta] {volume}[vi] Journal Article[pt]'.format( journal=journal, volume=volume )
+#   if issue:
+#     term += ' {issue}[ip]'.format(issue=issue)
+#   print (term)
+#   handle = Entrez.esearch( db='pubmed', term=term, retmax=10000 )
+#   record = Entrez.read( handle )
+#   handle.close()
+#   return record
 
-def main():
-  ids = []
-  for volume in volumes:
-    for issue in issues:
-      record = esearch( journal, volume, issue )
-      ids += record['IdList']
+# def main():
+#   ids = []
+#   for volume in volumes:
+#     for issue in issues:
+#       record = esearch( journal, volume, issue )
+#       ids += record['IdList']
 
-  with open('{issn}.txt'.format(issn=journal), 'a') as f:
-    for item in ids:
-      f.write('{item}\n'.format(item=item))
+#   with open('{issn}.txt'.format(issn=journal), 'a') as f:
+#     for item in ids:
+#       f.write('{item}\n'.format(item=item))
 
 
-main()
+# main()
 
 ######################################################################################################
 ########################     gene_info    ############################################################
 ######################################################################################################
 
-# df = pd.read_csv( './data/gene_info', sep='\t', header=0 , names=[
-#   'tax_id',
-#   'GeneID',
-#   'Symbol',
-#   'LocusTag',
-#   'Synonyms',
-#   'dbXrefs',
-#   'chromosome',
-#   'map_location',
-#   'description',
-#   'type_of_gene',
-#   'Symbol_from_nomenclature_authority',
-#   'Full_name_from_nomenclature_authority',
-#   'Nomenclature_status',
-#   'Other_designations',
-#   'Modification_date',
-#   'Feature_type'
-#   ])
+df = pd.read_csv( './data/gene_info', sep='\t', header=0 , names=[
+  'tax_id',
+  'GeneID',
+  'Symbol',
+  'LocusTag',
+  'Synonyms',
+  'dbXrefs',
+  'chromosome',
+  'map_location',
+  'description',
+  'type_of_gene',
+  'Symbol_from_nomenclature_authority',
+  'Full_name_from_nomenclature_authority',
+  'Nomenclature_status',
+  'Other_designations',
+  'Modification_date',
+  'Feature_type'
+  ])
 
 # PMID = 9518
-# taxid = 9606
-# GeneID = 7048
+taxid = 9606
+GeneID = 9518
 
-# df_GI = list( df[ df.GeneID == GeneID ] )
+df_GI = df[ df.GeneID == GeneID ]
 # df_GI_index = list( df[ df.tax_id == taxid ].index )
 # print( df.loc[df_GI_index, ['tax_id', 'GeneID', 'Symbol', 'description', 'dbXrefs', 'type_of_gene']] )
 
