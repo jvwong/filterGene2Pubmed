@@ -16,8 +16,9 @@ pd.set_option('max_colwidth', None)
 ALL_INPUT_FILE_NAME = 'all_pmids.txt'
 HITS_INPUT_FILE_NAME = 'hits_pmids.txt'
 
-TEST_OUTPUT_FILE_NAME = 'test_set.txt'
-TRAIN_OUTPUT_FILE_NAME = 'train_set.txt'
+TEST_OUTPUT_FILE_NAME = 'test_set_2.txt'
+TRAIN_OUTPUT_FILE_NAME = 'train_set_2.txt'
+
 TEST_HITS_FILE_NAME = 'test_hits_pmids.txt'
 TRAIN_HITS_FILE_NAME = 'train_hits_pmids.txt'
 
@@ -132,10 +133,10 @@ def createTestTrainPubMedData():
   ids_A = pd.read_csv( ALL_INPUT_FILE_NAME, dtype={'pmids': str} )['pmids']
   ids_H = pd.read_csv( HITS_INPUT_FILE_NAME, dtype={'pmids': str} )['pmids']
   id_lists = split( ids_A, ids_H )
-  # T_efetch_response = efetch( id_lists['T'] )
-  # efetch2Tsv( T_efetch_response, ids_H, TRAIN_OUTPUT_FILE_NAME )
-  # E_efetch_response = efetch( id_lists['E'] )
-  # efetch2Tsv( E_efetch_response, ids_H, TEST_OUTPUT_FILE_NAME )
+  T_efetch_response = efetch( id_lists['T'] )
+  efetch2Tsv( T_efetch_response, ids_H, TRAIN_OUTPUT_FILE_NAME )
+  E_efetch_response = efetch( id_lists['E'] )
+  efetch2Tsv( E_efetch_response, ids_H, TEST_OUTPUT_FILE_NAME )
   return id_lists
 
 # def readJsonFromFile( filename ):
