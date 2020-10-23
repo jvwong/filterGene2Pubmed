@@ -16,8 +16,8 @@ pd.set_option('max_colwidth', None)
 ALL_INPUT_FILE_NAME = 'all_pmids.txt'
 HITS_INPUT_FILE_NAME = 'hits_pmids.txt'
 
-TEST_OUTPUT_FILE_NAME = 'test_set_2.txt'
-TRAIN_OUTPUT_FILE_NAME = 'train_set_2.txt'
+TEST_OUTPUT_FILE_NAME = 'test_set_5.txt'
+TRAIN_OUTPUT_FILE_NAME = 'train_set_5.txt'
 
 TEST_HITS_FILE_NAME = 'test_hits_pmids.txt'
 TRAIN_HITS_FILE_NAME = 'train_hits_pmids.txt'
