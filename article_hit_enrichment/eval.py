@@ -12,41 +12,23 @@ pd.set_option('display.max_columns', None)
 pd.set_option('max_colwidth', None)
 
 TEST_HITS_FILE_NAME = 'test_hits_pmids.txt'
-TEST_OUTPUT_FILE_NAME = 'test_pubmed_info.json'
+TEST_OUTPUT_FILE_NAME = 'test_set.txt'
 
 ######################################################################################################
 ########################     EVALUATE         ########################################################
 ######################################################################################################
 
-def readDataCol( filename ):
-  ids = []
-  with open(filename, newline='') as f:
-    csvread = csv.reader( f )
-    for line in csvread:
-      ids.append( line[0] )
-  return ids
-
-
-def readJsonFromFile( filename ):
-  data = None
-  with open(filename, 'r') as f:
-    data = json.load(f)
-  return data
-
-
 def getHits( filename ):
-  proposed = set( readDataCol( filename ) )
-  actual = set( readDataCol( TEST_HITS_FILE_NAME ) )
+  ids_proposed = pd.read_csv( filename, dtype={'pmids': str} )['pmids']
+  ids_actual = pd.read_csv( TEST_HITS_FILE_NAME, dtype={'pmids': str} )['pmids']
+  proposed = set( ids_proposed )
+  actual = set( ids_actual )
   identified = set.intersection( actual, proposed )
   return {
     'actual': actual,
     'proposed': proposed,
     'identified': identified
   }
-
-def getTestArticleCount( filename ):
-  PubMedResponse = readJsonFromFile( filename )
-  return len( PubMedResponse['PubmedArticle'] )
 
 def getPmfDistr( M, n, N, x ):
   rv = hypergeom( M, n, N )
@@ -63,8 +45,8 @@ def getCdfDistr( M, n, N, x ):
 def calCdfDistr( M, n, N, x ):
   prb = hypergeom.cdf(x, M, n, N)
   print(f'x: {x}')
-  print(f'F(x): {prb}')
-  print(f'1 - F(X): {1 - prb}')
+  print(f'F(x): {prb:.5f}')
+  print(f'1 - F(X): {(1 - prb):.2f}')
 
 def plotResults(  M, n, N, x ):
   cdf_hits = getCdfDistr( M, n, N, x )
@@ -82,8 +64,9 @@ def plotResults(  M, n, N, x ):
   plt.show()
 
 def createDist( filename ):
+  ids_E = pd.read_csv( TEST_OUTPUT_FILE_NAME, sep='\t' )['pmid']
   hits = getHits( filename )
-  numTotalArticles = getTestArticleCount( TEST_OUTPUT_FILE_NAME )
+  numTotalArticles = len( ids_E )
   numTotalHits = len( hits['actual'] )
   numProposedArticles = len( hits['proposed'] )
   [ M, n, N ] = [ numTotalArticles, numTotalHits, numProposedArticles ]

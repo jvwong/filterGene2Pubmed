@@ -132,11 +132,11 @@ def createTestTrainPubMedData():
   ids_A = pd.read_csv( ALL_INPUT_FILE_NAME, dtype={'pmids': str} )['pmids']
   ids_H = pd.read_csv( HITS_INPUT_FILE_NAME, dtype={'pmids': str} )['pmids']
   id_lists = split( ids_A, ids_H )
-  T_efetch_response = efetch( id_lists['T'] )
-  efetch2Tsv( T_efetch_response, ids_H, TRAIN_OUTPUT_FILE_NAME )
-  E_efetch_response = efetch( id_lists['E'] )
-  efetch2Tsv( E_efetch_response, ids_H, TEST_OUTPUT_FILE_NAME )
-
+  # T_efetch_response = efetch( id_lists['T'] )
+  # efetch2Tsv( T_efetch_response, ids_H, TRAIN_OUTPUT_FILE_NAME )
+  # E_efetch_response = efetch( id_lists['E'] )
+  # efetch2Tsv( E_efetch_response, ids_H, TEST_OUTPUT_FILE_NAME )
+  return id_lists
 
 # def readJsonFromFile( filename ):
 #   data = None
@@ -165,5 +165,5 @@ def createTestTrainPubMedData():
 
 
 if __name__ == "__main__":
-  createTestTrainPubMedData()
+  id_lists = createTestTrainPubMedData()
   # getTestTrainHits()
