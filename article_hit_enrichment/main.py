@@ -16,8 +16,8 @@ pd.set_option('max_colwidth', None)
 ALL_INPUT_FILE_NAME = 'all_pmids.txt'
 HITS_INPUT_FILE_NAME = 'hits_pmids.txt'
 
-TEST_OUTPUT_FILE_NAME = 'test_set_5.txt'
-TRAIN_OUTPUT_FILE_NAME = 'train_set_5.txt'
+TEST_OUTPUT_FILE_NAME = 'test_set.txt'
+TRAIN_OUTPUT_FILE_NAME = 'train_set.txt'
 
 TEST_HITS_FILE_NAME = 'test_hits_pmids.txt'
 TRAIN_HITS_FILE_NAME = 'train_hits_pmids.txt'
@@ -81,12 +81,14 @@ def split( ids_A, ids_H ):
   A = set( ids_A )
   H = set( ids_H )
   num_hits = len( H )
-  T_size = math.floor( num_hits / 2 )
+  sample_size = math.floor( num_hits / 2 )
   M = A - H
-  T_hits = sample( H, T_size )
-  T_miss = sample( M, T_size )
-  E_hits = H - T_hits
-  E_miss = M - T_miss
+  T_hits = sample( H, sample_size )
+  T_miss = sample( M, sample_size )
+  E_hits_pool = H - T_hits
+  E_hits = sample( E_hits_pool, sample_size )
+  E_miss_pool = M - T_miss
+  E_miss = sample( E_miss_pool, sample_size )
   return {
     'T': list( T_hits | T_miss ),
     'E': list( E_hits | E_miss )
