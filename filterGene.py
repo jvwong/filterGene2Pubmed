@@ -43,30 +43,30 @@ pd.set_option('max_colwidth', None)
 ########################     gene_info    ############################################################
 ######################################################################################################
 
-df = pd.read_csv( './data/gene_info', sep='\t', header=0 , names=[
-  'tax_id',
-  'GeneID',
-  'Symbol',
-  'LocusTag',
-  'Synonyms',
-  'dbXrefs',
-  'chromosome',
-  'map_location',
-  'description',
-  'type_of_gene',
-  'Symbol_from_nomenclature_authority',
-  'Full_name_from_nomenclature_authority',
-  'Nomenclature_status',
-  'Other_designations',
-  'Modification_date',
-  'Feature_type'
-  ])
+# df = pd.read_csv( './data/gene_info', sep='\t', header=0 , names=[
+#   'tax_id',
+#   'GeneID',
+#   'Symbol',
+#   'LocusTag',
+#   'Synonyms',
+#   'dbXrefs',
+#   'chromosome',
+#   'map_location',
+#   'description',
+#   'type_of_gene',
+#   'Symbol_from_nomenclature_authority',
+#   'Full_name_from_nomenclature_authority',
+#   'Nomenclature_status',
+#   'Other_designations',
+#   'Modification_date',
+#   'Feature_type'
+#   ])
 
-# PMID = 9518
-taxid = 9606
-GeneID = 9518
+# # PMID = 9518
+# taxid = 9606
+# GeneID = 9518
 
-df_GI = df[ df.GeneID == GeneID ]
+# df_GI = df[ df.GeneID == GeneID ]
 # df_GI_index = list( df[ df.tax_id == taxid ].index )
 # print( df.loc[df_GI_index, ['tax_id', 'GeneID', 'Symbol', 'description', 'dbXrefs', 'type_of_gene']] )
 
