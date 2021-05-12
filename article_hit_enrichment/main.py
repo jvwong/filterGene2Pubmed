@@ -16,8 +16,8 @@ pd.set_option('max_colwidth', None)
 ALL_INPUT_FILE_NAME = 'all_pmids.txt'
 HITS_INPUT_FILE_NAME = 'hits_pmids.txt'
 
-TEST_OUTPUT_FILE_NAME = 'test_set_5.txt'
-TRAIN_OUTPUT_FILE_NAME = 'train_set_5.txt'
+TEST_OUTPUT_FILE_NAME = 'test_set_unbalance.txt'
+TRAIN_OUTPUT_FILE_NAME = 'train_set_unbalance.txt'
 
 TEST_HITS_FILE_NAME = 'test_hits_pmids.txt'
 TRAIN_HITS_FILE_NAME = 'train_hits_pmids.txt'
@@ -28,30 +28,35 @@ Entrez.email = "support@biofactoid.org"
 ########################     RETRIEVE JOURNAL PMIDS  ##################################################
 ######################################################################################################
 
-# journal = '1083-351X'
-# volumes = range(295, 296)
-# issues = range(31, 38, 1)
+journal = '2050-084X'
+volumes = range(9, 10)
+issues = range(1, 2, 1)
 
-# def esearch( journal, volume, issue=None ):
-#   term = '{journal}[ta] {volume}[vi] Journal Article[pt]'.format( journal=journal, volume=volume )
-#   if issue:
-#     term += ' {issue}[ip]'.format(issue=issue)
-#   print (term)
-#   handle = Entrez.esearch( db='pubmed', term=term, retmax=10000 )
-#   record = Entrez.read( handle )
-#   handle.close()
-#   return record
+def esearch( journal, volume, issue=None ):
+  term = '({journal}[ta] {volume}[vi] Journal Article[pt]) NOT (Review[pt] OR Comment[pt] OR  Published Erratum[pt])'.format( journal=journal, volume=volume )
+  if issue:
+    term += ' {issue}[ip]'.format(issue=issue)
+  print (term)
+  handle = Entrez.esearch( db='pubmed', term=term, retmax=10000 )
+  record = Entrez.read( handle )
+  handle.close()
+  return record
 
-# def getPmidsForJournal():
-#   ids = []
-#   for volume in volumes:
-#     for issue in issues:
-#       record = esearch( journal, volume, issue )
-#       ids += record['IdList']
+def getPmidsForJournal():
+  ids = []
+  for volume in volumes:
+    # for issue in issues:
+      record = esearch( journal, volume, None )
+      ids += record['IdList']
+      print(record['IdList'])
+      print(len(record['IdList']))
 
 #   with open('{issn}.txt'.format(issn=journal), 'a') as f:
 #     for item in ids:
 #       f.write('{item}\n'.format(item=item))
+
+# if __name__ == "__main__":
+#     getPmidsForJournal()
 
 
 ######################################################################################################
@@ -71,6 +76,9 @@ def sample( seq, count ):
 
 def split( ids_A, ids_H ):
   """
+  Given Series of pmids and the subset of hits, generate disjoint training and test sets,
+  each consisting of equal numbers of articles that are either suitable and not suitable.
+
   Notation:
     - A: set of all article ids
     - H: subset of article ids designated as a 'hit' (i.e. Good for Biofactoid)
@@ -81,14 +89,17 @@ def split( ids_A, ids_H ):
   A = set( ids_A )
   H = set( ids_H )
   num_hits = len( H )
-  sample_size = math.floor( num_hits / 2 )
+  sample_size_train = math.floor( num_hits / 2 )
   M = A - H
-  T_hits = sample( H, sample_size )
-  T_miss = sample( M, sample_size )
-  E_hits_pool = H - T_hits
-  E_hits = sample( E_hits_pool, sample_size )
+  T_hits = sample( H, sample_size_train )
+  T_miss = sample( M, sample_size_train )
+  E_hits = H - T_hits
   E_miss_pool = M - T_miss
-  E_miss = sample( E_miss_pool, sample_size )
+  N_M = len(M)
+  N_H = len(H)
+  N_E_hits = len(E_hits)
+  sample_size_E_miss = math.floor( ( N_M / N_H ) * N_E_hits )
+  E_miss = sample( E_miss_pool, sample_size_E_miss )
   return {
     'T': list( T_hits | T_miss ),
     'E': list( E_hits | E_miss )
@@ -135,10 +146,10 @@ def createTestTrainPubMedData():
   ids_A = pd.read_csv( ALL_INPUT_FILE_NAME, dtype={'pmids': str} )['pmids']
   ids_H = pd.read_csv( HITS_INPUT_FILE_NAME, dtype={'pmids': str} )['pmids']
   id_lists = split( ids_A, ids_H )
-  # T_efetch_response = efetch( id_lists['T'] )
-  # efetch2Tsv( T_efetch_response, ids_H, TRAIN_OUTPUT_FILE_NAME )
-  # E_efetch_response = efetch( id_lists['E'] )
-  # efetch2Tsv( E_efetch_response, ids_H, TEST_OUTPUT_FILE_NAME )
+  T_efetch_response = efetch( id_lists['T'] )
+  efetch2Tsv( T_efetch_response, ids_H, TRAIN_OUTPUT_FILE_NAME )
+  E_efetch_response = efetch( id_lists['E'] )
+  efetch2Tsv( E_efetch_response, ids_H, TEST_OUTPUT_FILE_NAME )
   return id_lists
 
 # def readJsonFromFile( filename ):
